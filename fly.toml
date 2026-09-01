@@ -3,9 +3,6 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
-[build]
-  image = "anycable/anycable-go:1.4"
-
 [env]
   PORT = "8080"
   ANYCABLE_BROKER = "memory"
