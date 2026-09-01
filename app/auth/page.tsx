@@ -9,8 +9,10 @@ import { nanoid } from "nanoid";
 export default async function AuthPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams?: Promise<{ [key: string]: string }> | { [key: string]: string };
 }) {
+  const resolvedSearchParams = await searchParams;
+
   async function login(form: FormData) {
     "use server";
 
@@ -31,7 +33,7 @@ export default async function AuthPage({
           maxAge: 3600 * 60,
         });
 
-        const id = searchParams.roomId ?? nanoid();
+        const id = resolvedSearchParams?.roomId ?? nanoid();
         return redirect(`/?roomId=${id}`);
       }
     }

@@ -10,9 +10,10 @@ import { Intro } from "./components/intro";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string };
+  searchParams?: Promise<{ [key: string]: string }> | { [key: string]: string };
 }): Promise<Metadata> {
-  const roomId = searchParams?.roomId ?? "default-room";
+  const resolvedSearchParams = await searchParams;
+  const roomId = resolvedSearchParams?.roomId ?? "default-room";
   const roomLabel = getRoomLabel(roomId);
 
   return {
@@ -32,11 +33,12 @@ export async function generateMetadata({
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string };
+  searchParams?: Promise<{ [key: string]: string }> | { [key: string]: string };
 }) {
-  const roomId = searchParams?.roomId ?? nanoid();
+  const resolvedSearchParams = await searchParams;
+  const roomId = resolvedSearchParams?.roomId ?? nanoid();
 
-  if (!searchParams?.roomId) {
+  if (!resolvedSearchParams?.roomId) {
     return redirect(`/?roomId=${roomId}`);
   }
 
@@ -54,7 +56,7 @@ export default async function Home({
     <>
       <Chat
         username={username}
-        header={<Header roomLabel={getRoomLabel(searchParams.roomId)} />}
+        header={<Header roomLabel={getRoomLabel(resolvedSearchParams.roomId)} />}
       />
       <Intro showIntro={showIntro} introShownAction={introShownAction} />
     </>
