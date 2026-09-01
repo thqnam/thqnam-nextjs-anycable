@@ -17,13 +17,25 @@ export async function generateMetadata({
   const roomLabel = getRoomLabel(roomId);
 
   return {
-    title: `${roomLabel} | AnyCable Next.js Demo`,
+    title: `${roomLabel} | THQNAM AnyCable Next.js`,
+    description: "Next.js messaging application of THQNAM using AnyCable as a real-time server and deployed on Vercel",
     openGraph: {
+      title: `${roomLabel} | THQNAM AnyCable Next.js`,
+      description: "Next.js messaging application of THQNAM using AnyCable as a real-time server and deployed on Vercel",
+      locale: 'vi_VN',
+      type: "website",
+      alternateLocale: ["en_US"],
+      siteName: "THQNAM AnyCable Next.js",
+      emails: ["thieuhuynhquangnam1996@gmail.com"],
+      countryName: "Vietnam",
+      phoneNumbers: ["+84937821788"],
+      url: "https://thqnam-nextjs-anycable.vercel.app",
       images: [
         {
           url: `/api/og/?roomLabel=${roomLabel}`,
           width: 1200,
           height: 630,
+          alt: `${roomLabel} | THQNAM AnyCable Next.js`,
         },
       ],
     },

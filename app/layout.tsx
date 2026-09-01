@@ -6,9 +6,9 @@ import { cx } from "class-variance-authority";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const title = "AnyCable Next.js Demo",
+const title = "THQNAM AnyCable Next.js",
   description =
-    "Next.js messaging application using AnyCable as a real-time server and deployed on Vercel";
+    "Next.js messaging application of THQNAM using AnyCable as a real-time server and deployed on Vercel";
 
 export const metadata: Metadata = {
   title,
@@ -16,8 +16,14 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    locale: "en_US",
+    locale: 'vi_VN',
     type: "website",
+    alternateLocale: ["en_US"],
+    siteName: "THQNAM AnyCable Next.js",
+    emails: ["thieuhuynhquangnam1996@gmail.com"],
+    countryName: "Vietnam",
+    phoneNumbers: ["+84937821788"],
+    url: "https://thqnam-nextjs-anycable.vercel.app",
   },
 };
 

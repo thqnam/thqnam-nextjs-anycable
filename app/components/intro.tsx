@@ -22,7 +22,7 @@ const features = [
         on{" "}
         <a
           className="text-red-700 underline hover:no-underline"
-          href="https://github.com/anycable/vercel-anycable-demo"
+          href="https://github.com/thqnam/thqnam-nextjs-anycable"
         >
           GitHub
         </a>
