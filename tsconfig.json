@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "ignoreDeprecations": "5.0",
     "forceConsistentCasingInFileNames": true,
     "lib": [
