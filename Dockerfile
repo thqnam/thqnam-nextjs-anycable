@@ -1,20 +1,45 @@
-FROM node:20-alpine AS builder
-WORKDIR /app
+# Stage 1: Build the Application
+# We use node:22 as the base for building and installing dependencies.
+FROM node:22 AS build
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+# Copy package.json and package-lock.json first to leverage Docker caching.
+# If these files don't change, subsequent builds can skip 'npm install'.
+COPY package*.json ./
+COPY tsconfig.json ./
 
+# Install dependencies including TypeScript
+RUN npm install
+RUN npm install --save-dev typescript @types/node
+
+# Copy the rest of the application source code
 COPY . .
-RUN pnpm build
 
-FROM node:20-alpine AS runner
-WORKDIR /app
+# Build TypeScript
+RUN npm run build || npx tsc
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
+# Stage 2: Create the Final Production Image
+# We use node:22-slim as a minimal runtime image.
+FROM node:22-slim
 
-COPY --from=builder /app ./
+# Set the working directory
+WORKDIR /usr/src/app
 
-CMD ["pnpm", "start"]
+# Copy only production dependencies
+COPY --from=build /usr/src/app/package*.json ./
+RUN npm install --only=production
+
+# Copy the built application files from the 'build' stage
+COPY --from=build /usr/src/app/dist ./dist
+
+# Expose the port your app runs on
+ENV PORT=8080
+EXPOSE $PORT
+
+# Run the application using the non-root user (recommended for security)
+USER node
+
+# Define the command to start your application
+CMD [ "node", "dist/index.js" ]
