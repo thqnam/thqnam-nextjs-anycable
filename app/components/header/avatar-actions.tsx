@@ -1,6 +1,5 @@
 "use client";
 
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import { Menu } from "../menu";
 import { Avatar } from "../avatar";
 import { $cable, $cableState, CableState } from "@/app/stores/cable";
@@ -55,13 +54,7 @@ function WrappedAvatar({ usernameOrEmail }: { usernameOrEmail: string }) {
 }
 
 function SignOutButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Menu.InteractiveItem as="button" disabled={pending}>
-      {pending ? "Signing out…" : "Sign out"}
-    </Menu.InteractiveItem>
-  );
+  return <Menu.InteractiveItem as="button">Sign out</Menu.InteractiveItem>;
 }
 
 function Status() {

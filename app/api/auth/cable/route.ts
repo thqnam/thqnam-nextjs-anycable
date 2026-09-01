@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 import { identifier, CABLE_URL } from "../../cable";
 
 export async function POST(request: Request) {
-  const token = cookies().get("token")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
 
   if (!token) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

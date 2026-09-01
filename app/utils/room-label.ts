@@ -40,6 +40,6 @@ const rooms = [
   "Hume",
 ];
 
-export const getRoomLabel = (id: string) => seededRandom(id, rooms);
+export const getRoomLabel = (id?: string) => seededRandom(id, rooms) ?? rooms[0];
 
 export const isRoomLabel = (name: string) => rooms.includes(name);

@@ -14,17 +14,18 @@ export default async function AuthPage({
   async function login(form: FormData) {
     "use server";
 
+    const cookieStore = await cookies();
     let username = form.get("username");
     if (typeof username === "string") {
       username = username.trim();
       if (username) {
-        cookies().set({
+        cookieStore.set({
           name: "token",
           value: await identifier.generateToken({ username }),
           httpOnly: true,
           maxAge: 3600 * 60,
         });
-        cookies().set({
+        cookieStore.set({
           name: "username",
           value: username,
           maxAge: 3600 * 60,

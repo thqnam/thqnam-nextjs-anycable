@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { identifier } from "./app/api/cable";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
   if (token) {

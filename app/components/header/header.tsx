@@ -4,14 +4,15 @@ import { redirect } from "next/navigation";
 import { nanoid } from "nanoid";
 import { AvatarActions } from "./avatar-actions";
 
-export function Header({ roomLabel }: { roomLabel: string }) {
-  const username = cookies().get("username")?.value!;
+export async function Header({ roomLabel }: { roomLabel: string }) {
+  const username = (await cookies()).get("username")?.value ?? "";
 
   async function signOut() {
     "use server";
 
-    cookies().delete("token");
-    cookies().delete("username");
+    const cookieStore = await cookies();
+    cookieStore.delete("token");
+    cookieStore.delete("username");
     return redirect("/auth");
   }
 

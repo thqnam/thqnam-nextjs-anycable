@@ -8,8 +8,12 @@ function simpleHash(str: string) {
   return hash;
 }
 
-export function seededRandom<T>(id: string, arr: T[]) {
-  const hash = simpleHash(id);
+export function seededRandom<T>(id: string | undefined, arr: T[]): T | undefined {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return undefined;
+  }
+
+  const hash = simpleHash(id ?? "default-room");
   const index = Math.abs(hash) % arr.length;
   return arr[index];
 }

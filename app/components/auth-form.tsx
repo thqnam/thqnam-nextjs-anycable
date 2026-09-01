@@ -1,7 +1,5 @@
 "use client";
 
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
-
 import { CombinedInput } from "./combined-input";
 
 export function AuthForm({ action }: { action: (form: FormData) => unknown }) {
@@ -20,7 +18,5 @@ export function AuthForm({ action }: { action: (form: FormData) => unknown }) {
 }
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return <CombinedInput.Button disabled={pending}>Enter</CombinedInput.Button>;
+  return <CombinedInput.Button>Enter</CombinedInput.Button>;
 }

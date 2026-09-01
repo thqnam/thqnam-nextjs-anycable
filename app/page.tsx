@@ -8,10 +8,11 @@ import { Metadata } from "next";
 import { Intro } from "./components/intro";
 
 export async function generateMetadata({
-  searchParams: { roomId },
+  searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams?: { [key: string]: string };
 }): Promise<Metadata> {
+  const roomId = searchParams?.roomId ?? "default-room";
   const roomLabel = getRoomLabel(roomId);
 
   return {
@@ -28,26 +29,31 @@ export async function generateMetadata({
   };
 }
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams?: { [key: string]: string };
 }) {
-  if (!searchParams.roomId) {
-    return redirect(`/?roomId=${nanoid()}`);
+  const roomId = searchParams?.roomId ?? nanoid();
+
+  if (!searchParams?.roomId) {
+    return redirect(`/?roomId=${roomId}`);
   }
-  const showIntro = !cookies().get("introShown")?.value;
+
+  const cookieStore = await cookies();
+  const username = cookieStore.get("username")?.value ?? "Guest";
+  const showIntro = !cookieStore.get("introShown")?.value;
 
   async function introShownAction() {
     "use server";
 
-    cookies().set("introShown", "1");
+    (await cookies()).set("introShown", "1");
   }
 
   return (
     <>
       <Chat
-        username={cookies().get("username")!.value}
+        username={username}
         header={<Header roomLabel={getRoomLabel(searchParams.roomId)} />}
       />
       <Intro showIntro={showIntro} introShownAction={introShownAction} />

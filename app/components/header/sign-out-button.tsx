@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "../button";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
 export function SignOutButton({ action }: { action: () => void }) {
   return (
@@ -12,11 +11,5 @@ export function SignOutButton({ action }: { action: () => void }) {
 }
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button size="sm" disabled={pending}>
-      Sign out
-    </Button>
-  );
+  return <Button size="sm">Sign out</Button>;
 }

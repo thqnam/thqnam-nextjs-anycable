@@ -10,23 +10,23 @@
     "anycable-go": "anycable-go --broadcast_adapter=http --presets=broker --rpc_impl=http --rpc_host=http://localhost:3000/api/anycable"
   },
   "dependencies": {
-    "@anycable/anycable-go": "^1.5.2",
-    "@anycable/core": "^0.7.8",
+    "@anycable/anycable-go": "^1.6.15",
+    "@anycable/core": "^0.7.13",
     "@anycable/serverless-js": "^0.1.0",
     "@anycable/web": "^0.7.3",
-    "@headlessui/react": "^1.7.17",
-    "@nanostores/react": "^0.7.1",
-    "@types/md5": "^2.3.2",
+    "@headlessui/react": "^1.7.19",
+    "@nanostores/react": "^0.7.3",
+    "@types/md5": "^2.3.6",
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
-    "class-variance-authority": "^0.7.0",
-    "jose": "^4.14.6",
+    "class-variance-authority": "^0.7.1",
+    "jose": "^4.15.9",
     "md5": "^2.3.0",
-    "nanoid": "^5.0.1",
-    "nanostores": "^0.9.3",
-    "next": "13.5.1",
+    "nanoid": "^5.1.16",
+    "nanostores": "^0.9.5",
+    "next": "16.3.4",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -34,11 +34,11 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "eslint": "8.45.0",
+    "eslint": "10.9.1",
     "eslint-config-next": "13.4.16",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.5.14"
   }
 }
