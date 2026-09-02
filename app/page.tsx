@@ -22,7 +22,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${roomLabel} | THQNAM AnyCable Next.js`,
       description: "Next.js messaging application of THQNAM using AnyCable as a real-time server and deployed on Vercel",
-      locale: 'vi_VN',
+      locale: "vi_VN",
       type: "website",
       alternateLocale: ["en_US"],
       siteName: "THQNAM AnyCable Next.js",

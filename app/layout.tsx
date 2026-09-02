@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    locale: 'vi_VN',
+    locale: "vi_VN",
     type: "website",
     alternateLocale: ["en_US"],
     siteName: "THQNAM AnyCable Next.js",
