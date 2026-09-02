@@ -24,6 +24,16 @@ export const metadata: Metadata = {
     countryName: "Vietnam",
     phoneNumbers: ["+84937821788"],
     url: "https://thqnam-nextjs-anycable.vercel.app",
+    images: [
+      {
+        url: `https://thqnam-nextjs-anycable.vercel.app/my-picture.png`,
+        alt: "THQNAM AnyCable Next.js",
+        width: 1200,
+        height: 630,
+        type: "image/jpg",
+        secureUrl: `https://thqnam-nextjs-anycable.vercel.app/my-picture.png`,
+      }
+    ]
   },
 };
 

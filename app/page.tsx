@@ -36,6 +36,8 @@ export async function generateMetadata({
           width: 1200,
           height: 630,
           alt: `${roomLabel} | THQNAM AnyCable Next.js`,
+          type: "image/jpg",
+          secureUrl: `/api/og/?roomLabel=${roomLabel}`,
         },
       ],
     },
