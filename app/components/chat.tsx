@@ -24,17 +24,19 @@ export function Chat({
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomId");
   const state = useStore($cableState);
-  if (state === "connected" || state === "idle") {
-    createMessage(`Welcome ${username} to our chat room!`);
-  } else {
-    createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
-  }
 
   useEffect(() => {
     if (roomId) $roomId.set(roomId);
   }, [roomId]);
 
-  useEffect(() => $user.set({ username }), [username]);
+  useEffect(() => { 
+    $user.set({ username });
+    if (state === "connected" || state === "idle") {
+      createMessage(`Welcome ${username} to our chat room!`);
+    } else {
+      createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
+    }
+  } , [username]);
   useEffect(() => addAutoScroll(document.documentElement), []);
 
   return (
