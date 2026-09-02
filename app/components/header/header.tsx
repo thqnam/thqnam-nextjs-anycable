@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { AvatarActions } from "./avatar-actions";
 import { createMessage } from "@/app/stores/messages";
 import { useStore } from "@nanostores/react";
-import { $cable, $cableState } from "@/app/stores/cable";
+import { $cableState } from "@/app/stores/cable";
 
 export async function Header({ roomLabel }: { roomLabel: string }) {
   const username = (await cookies()).get("username")?.value ?? "Guest";
@@ -15,8 +15,6 @@ export async function Header({ roomLabel }: { roomLabel: string }) {
     const state = useStore($cableState);
     if (state === "connected"){
       createMessage(`User ${username} has signed out.`);
-      const cable = useStore($cable);
-      cable?.disconnect();
       const cookieStore = await cookies();
       cookieStore.delete("token");
       cookieStore.delete("username");
