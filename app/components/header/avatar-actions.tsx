@@ -32,9 +32,11 @@ export function AvatarActions({
             </Menu.ItemRoot>
           </div>
           <div className="pt-1">
-            <Menu.ItemRoot disabled>
+            <Menu.ItemRoot>
               <form action={signOutAction}>
-                <SignOutButton />
+                <Menu.InteractiveItem as="button" type="submit">
+                  Sign out
+                </Menu.InteractiveItem>
               </form>
             </Menu.ItemRoot>
           </div>
@@ -52,10 +54,6 @@ function WrappedAvatar({ usernameOrEmail }: { usernameOrEmail: string }) {
       <Avatar username={usernameOrEmail} indicatorClass={bgClass[state]} />
     </div>
   );
-}
-
-function SignOutButton() {
-  return <Menu.InteractiveItem as="button">Sign out</Menu.InteractiveItem>;
 }
 
 function Status() {

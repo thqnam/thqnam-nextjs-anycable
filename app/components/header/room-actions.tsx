@@ -6,8 +6,13 @@ import { $cableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
 import { redirect } from "next/navigation";
 
-async function copyToClipboard({ usernameOrEmail }: { usernameOrEmail?: string }) {
-  const state = useStore($cableState);
+async function copyToClipboard({
+  usernameOrEmail,
+  state,
+}: {
+  usernameOrEmail?: string;
+  state: ReturnType<typeof useStore<typeof $cableState>>;
+}) {
   if (state === "connected" || state === "idle") {
     createMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
     await navigator.clipboard.writeText(window.location.href);
@@ -16,8 +21,15 @@ async function copyToClipboard({ usernameOrEmail }: { usernameOrEmail?: string }
   }
 }
 
-async function newRoom({ usernameOrEmail, newRoomId }: { usernameOrEmail: string; newRoomId: string }) {
-  const state = useStore($cableState);
+async function newRoom({
+  usernameOrEmail,
+  newRoomId,
+  state,
+}: {
+  usernameOrEmail: string;
+  newRoomId: string;
+  state: ReturnType<typeof useStore<typeof $cableState>>;
+}) {
   if (state === "connected" || state === "idle") {
     createMessage(`User ${usernameOrEmail} has created a new room.`);
     redirect(`/?roomId=${newRoomId}`);
@@ -27,17 +39,25 @@ async function newRoom({ usernameOrEmail, newRoomId }: { usernameOrEmail: string
 }
 
 export function RoomActions({ usernameOrEmail, newRoomId }: { usernameOrEmail: string; newRoomId: string }) {
+  const state = useStore($cableState);
+
   return (
     <Menu.Root>
       <Menu.Trigger />
       <Menu.Body align="left">
         <Menu.ItemRoot>
-          <Menu.InteractiveItem as="button" onClick={() => copyToClipboard({ usernameOrEmail })}>
+          <Menu.InteractiveItem
+            as="button"
+            onClick={() => copyToClipboard({ usernameOrEmail, state })}
+          >
             Copy URL
           </Menu.InteractiveItem>
         </Menu.ItemRoot>
         <Menu.ItemRoot>
-          <Menu.InteractiveItem as="button" onClick={() => newRoom({ usernameOrEmail, newRoomId })}>
+          <Menu.InteractiveItem
+            as="button"
+            onClick={() => newRoom({ usernameOrEmail, newRoomId, state })}
+          >
             New room
           </Menu.InteractiveItem>
         </Menu.ItemRoot>

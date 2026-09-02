@@ -3,28 +3,12 @@ import { RoomActions } from "./room-actions";
 import { redirect } from "next/navigation";
 import { nanoid } from "nanoid";
 import { AvatarActions } from "./avatar-actions";
-// import { createMessage } from "@/app/stores/messages";
-// import { useStore } from "@nanostores/react";
-// import { $cableState } from "@/app/stores/cable";
 
 export async function Header({ roomLabel }: { roomLabel: string }) {
   const username = (await cookies()).get("username")?.value ?? "Guest";
 
   async function signOut() {
     "use server";
-    // const state = useStore($cableState);
-    // if (state === "connected"){
-    //   createMessage(`User ${username} has signed out.`);
-    //   const cookieStore = await cookies();
-    //   cookieStore.delete("token");
-    //   cookieStore.delete("username");
-    //   return redirect("/auth");
-    // } else {
-    //   const cookieStore = await cookies();
-    //   cookieStore.delete("token");
-    //   cookieStore.delete("username");
-    //   return redirect("/auth");
-    // }
     const cookieStore = await cookies();
     cookieStore.delete("token");
     cookieStore.delete("username");
