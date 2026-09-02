@@ -3,9 +3,9 @@ import { RoomActions } from "./room-actions";
 import { redirect } from "next/navigation";
 import { nanoid } from "nanoid";
 import { AvatarActions } from "./avatar-actions";
-import { createMessage } from "@/app/stores/messages";
-import { useStore } from "@nanostores/react";
-import { $cableState } from "@/app/stores/cable";
+// import { createMessage } from "@/app/stores/messages";
+// import { useStore } from "@nanostores/react";
+// import { $cableState } from "@/app/stores/cable";
 
 export async function Header({ roomLabel }: { roomLabel: string }) {
   const username = (await cookies()).get("username")?.value ?? "Guest";
