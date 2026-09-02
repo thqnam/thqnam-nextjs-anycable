@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     url: "https://thqnam-nextjs-anycable.vercel.app",
     images: [
       {
-        url: `https://thqnam-nextjs-anycable.vercel.app/my-picture-1.png`,
+        url: `https://thqnam-nextjs-anycable.vercel.app/my-picture-1.jpg`,
         alt: "THQNAM AnyCable Next.js",
         width: 1200,
         height: 630,
         type: "image/jpg",
-        secureUrl: `https://thqnam-nextjs-anycable.vercel.app/my-picture-1.png`,
+        secureUrl: `https://thqnam-nextjs-anycable.vercel.app/my-picture-1.jpg`,
       }
     ]
   },
