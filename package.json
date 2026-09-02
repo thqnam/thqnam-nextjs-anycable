@@ -9,9 +9,9 @@
     "lint": "next lint",
     "anycable-go": "anycable-go --broadcast_adapter=http --presets=broker --rpc_impl=http --rpc_host=http://localhost:3000/api/anycable"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@11.25.0",
   "engines": {
-    "node": "20.x"
+    "node": "26.7.0"
   },
   "dependencies": {
     "@anycable/anycable-go": "^1.6.15",
