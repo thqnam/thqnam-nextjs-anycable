@@ -5,6 +5,7 @@ import { Avatar } from "../avatar";
 import { $cable, $cableState, CableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
 import { cx } from "class-variance-authority";
+import { createMessage } from "@/app/stores/messages";
 
 export function AvatarActions({
   usernameOrEmail,
@@ -27,7 +28,7 @@ export function AvatarActions({
             </Menu.TextItem>
 
             <Menu.ItemRoot>
-              <DisconnectButton />
+              <DisconnectButton usernameOrEmail={usernameOrEmail}/>
             </Menu.ItemRoot>
           </div>
           <div className="pt-1">
@@ -85,7 +86,11 @@ function Indicator() {
   );
 }
 
-function DisconnectButton() {
+function DisconnectButton({
+  usernameOrEmail,
+}: {
+  usernameOrEmail: string;
+}) {
   const state = useStore($cableState);
   const cable = useStore($cable);
 
@@ -93,7 +98,9 @@ function DisconnectButton() {
   if (state === "disconnected") return null;
 
   const onClick =
-    state === "closed" ? () => cable?.connect() : () => cable?.disconnect();
+    state === "closed" ? 
+    () => { cable?.connect() ; createMessage(`User ${usernameOrEmail} has connected to the server.`); } : 
+    () => { createMessage(`User ${usernameOrEmail} is disconnecting from the server.`) ; cable?.disconnect() };
 
   return (
     <Menu.InteractiveItem as="button" onClick={onClick}>

@@ -8,6 +8,8 @@ import { useSearchParams } from "next/navigation";
 import { useStore } from "@nanostores/react";
 import { $user } from "../stores/user";
 import { OfflineOverlay } from "./offline-overlay";
+import { createMessage } from "../stores/messages";
+import { $cableState } from "@/app/stores/cable";
 
 export function Chat({
   header,
@@ -21,6 +23,12 @@ export function Chat({
 
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomId");
+  const state = useStore($cableState);
+  if (state === "connected" || state === "idle") {
+    createMessage(`Welcome ${username} to our chat room!`);
+  } else {
+    createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
+  }
 
   useEffect(() => {
     if (roomId) $roomId.set(roomId);
