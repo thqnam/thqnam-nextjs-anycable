@@ -33,7 +33,7 @@ export async function Header({ roomLabel }: { roomLabel: string }) {
     <div className="rounded-b-lg border-gray-200 bg-white p-4 shadow-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <RoomActions newRoomId={nanoid()} />
+          <RoomActions usernameOrEmail={username} newRoomId={nanoid()} />
           <div className="flex flex-col">
             <div className="text-2xs uppercase text-gray-500">Room</div>
             <div className="truncate font-semibold">{roomLabel}</div>
