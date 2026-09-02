@@ -29,7 +29,7 @@ export async function GET(request: Request) {
               {roomLabel}
             </div>
           </div>
-          <div tw="text-2xl mt-8 text-gray-500">Powered by AnyCable</div>
+          <div tw="text-2xl mt-8 text-gray-500">Make by THQNAM</div>
         </div>
         <svg
           style={{

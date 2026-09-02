@@ -84,7 +84,7 @@ export function Intro({
                   as="h3"
                   className="text-center text-base font-semibold leading-6 text-gray-900"
                 >
-                  Welcome to AnyCable serverless demo!
+                  Welcome to THQNAM AnyCable Next.js serverless !
                 </Dialog.Title>
                 <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-4 text-sm leading-7 text-gray-600">
                   {features.map((feature) => (

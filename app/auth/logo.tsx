@@ -6,7 +6,7 @@ export function Logo() {
       viewBox="0 0 80 102"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title>Normal</title>
+      <title>THQNAM</title>
       <defs>
         <linearGradient x1="0%" y1="10.229%" y2="10.229%" id="a">
           <stop stopColor="#F22B2B" offset="0%" />
