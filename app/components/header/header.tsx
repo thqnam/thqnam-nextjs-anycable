@@ -12,19 +12,23 @@ export async function Header({ roomLabel }: { roomLabel: string }) {
 
   async function signOut() {
     "use server";
-    const state = useStore($cableState);
-    if (state === "connected"){
-      createMessage(`User ${username} has signed out.`);
-      const cookieStore = await cookies();
-      cookieStore.delete("token");
-      cookieStore.delete("username");
-      return redirect("/auth");
-    } else {
-      const cookieStore = await cookies();
-      cookieStore.delete("token");
-      cookieStore.delete("username");
-      return redirect("/auth");
-    }
+    // const state = useStore($cableState);
+    // if (state === "connected"){
+    //   createMessage(`User ${username} has signed out.`);
+    //   const cookieStore = await cookies();
+    //   cookieStore.delete("token");
+    //   cookieStore.delete("username");
+    //   return redirect("/auth");
+    // } else {
+    //   const cookieStore = await cookies();
+    //   cookieStore.delete("token");
+    //   cookieStore.delete("username");
+    //   return redirect("/auth");
+    // }
+    const cookieStore = await cookies();
+    cookieStore.delete("token");
+    cookieStore.delete("username");
+    return redirect("/auth");
   }
 
   return (

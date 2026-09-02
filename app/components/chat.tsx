@@ -36,7 +36,7 @@ export function Chat({
     } else {
       createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
     }
-  } , [username]);
+  } , [username, state]);
   useEffect(() => addAutoScroll(document.documentElement), []);
 
   return (
