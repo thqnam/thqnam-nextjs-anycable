@@ -29,14 +29,17 @@ export function Chat({
     if (roomId) $roomId.set(roomId);
   }, [roomId]);
 
-  useEffect(() => { 
+  useEffect(() => {
     $user.set({ username });
+  }, [username]);
+
+  useEffect(() => {
     if (state === "connected" || state === "idle") {
       createMessage(`Welcome ${username} to our chat room!`);
     } else {
       createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
     }
-  } , [username, state]);
+  }, [username, state]);
   useEffect(() => addAutoScroll(document.documentElement), []);
 
   return (
