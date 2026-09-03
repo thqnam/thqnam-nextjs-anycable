@@ -14,11 +14,11 @@ export const NewMessageForm = () => {
   return (
     <form
       className="flex gap-2"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
 
         if (body && !submitDisabled) {
-          createMessage(body);
+          await createMessage(body);
           setBody("");
         }
       }}

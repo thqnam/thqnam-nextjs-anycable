@@ -14,7 +14,7 @@ async function copyToClipboard({
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
   if (state === "connected" || state === "idle") {
-    createMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
+    await createMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
     await navigator.clipboard.writeText(window.location.href);
   } else {
     await navigator.clipboard.writeText(window.location.href);
@@ -31,7 +31,7 @@ async function newRoom({
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
   if (state === "connected" || state === "idle") {
-    createMessage(`User ${usernameOrEmail} has created a new room.`);
+    await createMessage(`User ${usernameOrEmail} has created a new room.`);
     redirect(`/?roomId=${newRoomId}`);
   } else {
     redirect(`/?roomId=${newRoomId}`);

@@ -33,11 +33,10 @@ export function AvatarActions({
           </div>
           <div className="pt-1">
             <Menu.ItemRoot>
-              <form action={signOutAction}>
-                <Menu.InteractiveItem as="button" type="submit">
-                  Sign out
-                </Menu.InteractiveItem>
-              </form>
+              <SignOutButton
+                usernameOrEmail={usernameOrEmail}
+                signOutAction={signOutAction}
+              />
             </Menu.ItemRoot>
           </div>
         </div>
@@ -96,13 +95,41 @@ function DisconnectButton({
   if (state === "disconnected") return null;
 
   const onClick =
-    state === "closed" ? 
-    () => { cable?.connect() ; createMessage(`User ${usernameOrEmail} has connected to the server.`); } : 
-    () => { createMessage(`User ${usernameOrEmail} is disconnecting from the server.`) ; cable?.disconnect() };
+    state === "closed"
+      ? async () => {
+      cable?.connect();
+      await createMessage(`User ${usernameOrEmail} has connected to the server.`);
+    }
+      : async () => {
+      await createMessage(`User ${usernameOrEmail} is disconnecting from the server.`);
+      cable?.disconnect();
+    };
 
   return (
     <Menu.InteractiveItem as="button" onClick={onClick}>
       {state === "closed" ? "Connect" : "Disconnect"}
     </Menu.InteractiveItem>
+  );
+}
+
+function SignOutButton({
+  usernameOrEmail,
+  signOutAction,
+}: {
+  usernameOrEmail: string;
+  signOutAction: () => void;
+}) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await createMessage(`Goodbye ${usernameOrEmail} from our chat room`);
+    signOutAction();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Menu.InteractiveItem as="button" type="submit">
+        Sign out
+      </Menu.InteractiveItem>
+    </form>
   );
 }

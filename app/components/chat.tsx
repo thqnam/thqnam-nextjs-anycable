@@ -34,11 +34,15 @@ export function Chat({
   }, [username]);
 
   useEffect(() => {
-    if (state === "connected" || state === "idle") {
-      createMessage(`Welcome ${username} to our chat room!`);
-    } else {
-      createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
-    }
+    const sendWelcomeMessage = async () => {
+      if (state === "connected" || state === "idle") {
+        await createMessage(`Welcome ${username} to our chat room!`);
+      } else {
+        await createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
+      }
+    };
+
+    void sendWelcomeMessage();
   }, [username, state]);
   useEffect(() => addAutoScroll(document.documentElement), []);
 

@@ -47,6 +47,13 @@ export const addMessage = (message: IMessage) => {
   $messages.set([...$messages.get(), message]);
 };
 
-export const createMessage = async (body: string) => {
-  $channel.value?.sendMessage({ body });
+export const createMessage = async (body: string): Promise<void> => {
+  const channel = $channel.value;
+
+  if (!channel) {
+    throw new Error("Chat channel is not available");
+  }
+
+  await channel.ensureSubscribed();
+  await channel.sendMessage({ body });
 };

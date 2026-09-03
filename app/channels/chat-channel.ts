@@ -11,7 +11,7 @@ export type ChatChannelParams = {
 };
 
 export interface ChatActions {
-  sendMessage(message: SentMessage): void;
+  sendMessage(message: SentMessage): Promise<void>;
 }
 
 interface ChatEvents extends ChannelEvents<IMessage> {}
@@ -24,7 +24,7 @@ export default class ChatChannel extends Channel<
 > {
   static identifier = "chat";
 
-  sendMessage(message: SentMessage) {
-    this.perform("sendMessage", message);
+  async sendMessage(message: SentMessage): Promise<void> {
+    await this.perform("sendMessage", message);
   }
 }
