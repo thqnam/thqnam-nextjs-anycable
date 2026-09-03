@@ -20,7 +20,7 @@ const broadcastToken = process.env.ANYCABLE_HTTP_BROADCAST_SECRET || "";
 export const broadcastTo = broadcaster(broadcastURL, broadcastToken);
 
 const jwtSecret = process.env.ANYCABLE_JWT_ID_KEY || "hey";
-const jwtTTL = "2h";
+const jwtTTL = "60h";
 
 export const identifier = identificator<CableIdentifiers>(jwtSecret, jwtTTL);
 
