@@ -22,7 +22,8 @@ export const MessageList = () => {
         */
         const showName =
           !systemMessage &&
-          !mine && messages[i - 1]?.username !== message.username;
+          !mine && 
+          messages[i - 1]?.username !== message.username;
         const showAvatar =
           !systemMessage &&
           !mine &&
