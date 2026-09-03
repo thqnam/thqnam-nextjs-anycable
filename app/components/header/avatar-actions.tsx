@@ -5,7 +5,7 @@ import { Avatar } from "../avatar";
 import { $cable, $cableState, CableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
 import { cx } from "class-variance-authority";
-import { createMessage } from "@/app/stores/messages";
+import { createSystemMessage } from "@/app/stores/messages";
 
 export function AvatarActions({
   usernameOrEmail,
@@ -98,10 +98,10 @@ function DisconnectButton({
     state === "closed"
       ? async () => {
       cable?.connect();
-      await createMessage(`User ${usernameOrEmail} has connected to the server.`);
+      await createSystemMessage(`User ${usernameOrEmail} has connected to the server.`);
     }
       : async () => {
-      await createMessage(`User ${usernameOrEmail} is disconnecting from the server.`);
+      await createSystemMessage(`User ${usernameOrEmail} is disconnecting from the server.`);
       cable?.disconnect();
     };
 
@@ -121,7 +121,7 @@ function SignOutButton({
 }) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await createMessage(`Goodbye ${usernameOrEmail} from our chat room`);
+    await createSystemMessage(`Goodbye ${usernameOrEmail} from our chat room`);
     signOutAction();
   };
 

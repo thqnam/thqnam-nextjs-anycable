@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "../menu";
-import { createMessage } from "@/app/stores/messages";
+import { createSystemMessage } from "@/app/stores/messages";
 import { $cableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
 import { redirect } from "next/navigation";
@@ -14,7 +14,7 @@ async function copyToClipboard({
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
   if (state === "connected" || state === "idle") {
-    await createMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
+    await createSystemMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
     await navigator.clipboard.writeText(window.location.href);
   } else {
     await navigator.clipboard.writeText(window.location.href);
@@ -31,7 +31,7 @@ async function newRoom({
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
   if (state === "connected" || state === "idle") {
-    await createMessage(`User ${usernameOrEmail} has created a new room.`);
+    await createSystemMessage(`User ${usernameOrEmail} has created a new room.`);
     redirect(`/?roomId=${newRoomId}`);
   } else {
     redirect(`/?roomId=${newRoomId}`);

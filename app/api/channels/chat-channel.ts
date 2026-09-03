@@ -45,7 +45,7 @@ export default class ChatChannel
     params: ChatChannelParams,
     data: SentMessage,
   ) {
-    const { body } = data;
+    const { body, kind = "user" } = data;
 
     if (!body) {
       throw new Error("Body is required");
@@ -60,6 +60,7 @@ export default class ChatChannel
       username: handle.identifiers!.username,
       body,
       createdAt: new Date().toISOString(),
+      kind,
     };
 
     await broadcastTo(`room:${params.roomId}`, message);

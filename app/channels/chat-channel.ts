@@ -1,9 +1,10 @@
 import { Channel } from "@anycable/web";
 import type { ChannelEvents } from "@anycable/core";
-import type { Message as IMessage } from "../components/message";
+import type { Message as IMessage, MessageKind } from "../components/message";
 
 export type SentMessage = {
   body: string;
+  kind?: MessageKind;
 };
 
 export type ChatChannelParams = {

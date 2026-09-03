@@ -2,7 +2,10 @@
 
 import { atom, computed, onSet } from "nanostores";
 
-import type { Message as IMessage } from "../components/message";
+import type {
+  Message as IMessage,
+  MessageKind,
+} from "../components/message";
 
 import ChatChannel from "../channels/chat-channel";
 import { $cable } from "./cable";
@@ -47,7 +50,10 @@ export const addMessage = (message: IMessage) => {
   $messages.set([...$messages.get(), message]);
 };
 
-export const createMessage = async (body: string): Promise<void> => {
+export const createMessage = async (
+  body: string,
+  kind: MessageKind = "user",
+): Promise<void> => {
   const channel = $channel.value;
 
   if (!channel) {
@@ -55,5 +61,7 @@ export const createMessage = async (body: string): Promise<void> => {
   }
 
   await channel.ensureSubscribed();
-  await channel.sendMessage({ body });
+  await channel.sendMessage({ body, kind });
 };
+
+export const createSystemMessage = (body: string): Promise<void> => createMessage(body, "system");

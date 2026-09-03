@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useStore } from "@nanostores/react";
 import { $user } from "../stores/user";
 import { OfflineOverlay } from "./offline-overlay";
-import { createMessage } from "../stores/messages";
+import { createSystemMessage } from "../stores/messages";
 import { $cableState } from "@/app/stores/cable";
 
 export function Chat({
@@ -24,6 +24,27 @@ export function Chat({
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomId");
   const state = useStore($cableState);
+  const sendWelcomeMessage = async () => {
+    switch (state) {
+      case "connected":
+        await createSystemMessage(`User ${username} is now online.`);
+        break;
+      case "idle":
+        await createSystemMessage(`User ${username} is now idle.`);
+        break;
+      case "disconnected":
+        await createSystemMessage(`User ${username} is now offline.`);
+        break;
+      case "connecting":
+        await createSystemMessage(`User ${username} is currently connecting.`);
+        break;
+      case "closed":
+        await createSystemMessage(`User ${username} has closed the connection.`);
+        break;
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     if (roomId) $roomId.set(roomId);
@@ -34,16 +55,9 @@ export function Chat({
   }, [username]);
 
   useEffect(() => {
-    const sendWelcomeMessage = async () => {
-      if (state === "connected" || state === "idle") {
-        await createMessage(`Welcome ${username} to our chat room!`);
-      } else {
-        await createMessage(`User ${username} is currently offline. Please check ${username}'s internet connection.`);
-      }
-    };
-
     void sendWelcomeMessage();
   }, [username, state]);
+
   useEffect(() => addAutoScroll(document.documentElement), []);
 
   return (

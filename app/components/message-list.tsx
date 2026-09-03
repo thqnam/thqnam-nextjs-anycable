@@ -12,7 +12,8 @@ export const MessageList = () => {
   return (
     <div className="flex h-full flex-col justify-end gap-2 py-4 pl-8">
       {messages.map((message, i) => {
-        const mine = message.username === user.username;
+        const systemMessage = message.kind === "system";
+        const mine = !systemMessage && message.username === user.username;
 
         /*
         Aligned with telegram:
@@ -20,9 +21,12 @@ export const MessageList = () => {
         2. we show avatar for each last message of a user in a sequence of messages from them
         */
         const showName =
+          !systemMessage &&
           !mine && messages[i - 1]?.username !== message.username;
         const showAvatar =
-          !mine && messages[i + 1]?.username !== message.username;
+          !systemMessage &&
+          !mine &&
+          messages[i + 1]?.username !== message.username;
 
         return (
           <Message
