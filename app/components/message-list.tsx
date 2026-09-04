@@ -40,7 +40,7 @@ export const MessageList = () => {
         );
       })}
       {!messages.length && (
-        <p className="text-center text-sm text-gray-500">{`No messages have bees seen here recently. Don't be shy, send something!`}</p>
+        <p className="text-center text-sm text-gray-500">{`No messages have been seen here recently. Don't be shy, send something!`}</p>
       )}
     </div>
   );

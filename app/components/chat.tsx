@@ -32,15 +32,6 @@ export function Chat({
       case "idle":
         await createSystemMessage(`User ${username} is now idle.`);
         break;
-      case "disconnected":
-        await createSystemMessage(`User ${username} is now offline.`);
-        break;
-      case "connecting":
-        await createSystemMessage(`User ${username} is currently connecting.`);
-        break;
-      case "closed":
-        await createSystemMessage(`User ${username} has closed the connection.`);
-        break;
       default:
         break;
     }

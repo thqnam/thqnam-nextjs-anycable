@@ -4,7 +4,7 @@ import { Menu } from "../menu";
 import { createSystemMessage } from "@/app/stores/messages";
 import { $cableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 async function copyToClipboard({
   usernameOrEmail,
@@ -30,12 +30,10 @@ async function newRoom({
   newRoomId: string;
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
-  if (state === "connected" || state === "idle") {
-    await createSystemMessage(`User ${usernameOrEmail} has created a new room.`);
-    redirect(`/?roomId=${newRoomId}`);
-  } else {
-    redirect(`/?roomId=${newRoomId}`);
-  }
+  const router = useRouter();
+  if (state === "connected" || state === "idle") await createSystemMessage(`User ${usernameOrEmail} has created a new room.`);
+  router.push(`/?roomId=${newRoomId}`);
+  return;
 }
 
 export function RoomActions({ usernameOrEmail, newRoomId }: { usernameOrEmail: string; newRoomId: string }) {

@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "anycable-go": "anycable-go --broadcast_adapter=http --presets=broker --rpc_impl=http --rpc_host=http://localhost:3000/api/anycable"
   },
   "packageManager": "pnpm@11.25.0",

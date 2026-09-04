@@ -2,7 +2,7 @@ import { Channel, ChannelHandle } from "@anycable/serverless-js";
 import type { ServerAction } from "@anycable/serverless-js";
 import type { CableIdentifiers } from "../cable";
 import { broadcastTo } from "../cable";
-
+import { nanoid } from "nanoid";
 import type { SentMessage } from "@/app/channels/chat-channel";
 import { ChatChannelParams, ChatActions } from "@/app/channels/chat-channel";
 import type { Message as IMessage } from "../../components/message";
@@ -56,7 +56,7 @@ export default class ChatChannel
     );
 
     const message: IMessage = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: nanoid(),
       username: handle.identifiers!.username,
       body,
       createdAt: new Date().toISOString(),
