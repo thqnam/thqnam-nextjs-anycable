@@ -27,10 +27,7 @@ export function Chat({
   const sendWelcomeMessage = async () => {
     switch (state) {
       case "connected":
-        await createSystemMessage(`User ${username} is now online.`);
-        break;
-      case "idle":
-        await createSystemMessage(`User ${username} is now idle.`);
+        await createSystemMessage(`System: User ${username} is now online.`);
         break;
       default:
         break;

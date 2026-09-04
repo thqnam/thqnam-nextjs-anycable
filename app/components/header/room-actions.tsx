@@ -14,30 +14,21 @@ async function copyToClipboard({
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
   if (state === "connected" || state === "idle") {
-    await createSystemMessage(`User ${usernameOrEmail} has copied the room URL to clipboard.`);
+    await createSystemMessage(`System: User ${usernameOrEmail} has copied the room URL to clipboard.`);
     await navigator.clipboard.writeText(window.location.href);
   } else {
     await navigator.clipboard.writeText(window.location.href);
   }
 }
 
-async function newRoom({
-  usernameOrEmail,
-  newRoomId,
-  state,
-}: {
-  usernameOrEmail: string;
-  newRoomId: string;
-  state: ReturnType<typeof useStore<typeof $cableState>>;
-}) {
-  const router = useRouter();
-  if (state === "connected" || state === "idle") await createSystemMessage(`User ${usernameOrEmail} has created a new room.`);
-  router.push(`/?roomId=${newRoomId}`);
-  return;
-}
-
 export function RoomActions({ usernameOrEmail, newRoomId }: { usernameOrEmail: string; newRoomId: string }) {
   const state = useStore($cableState);
+  const router = useRouter();
+
+  const handleNewRoom = async () => {
+    if (state === "connected" || state === "idle") await createSystemMessage(`System: User ${usernameOrEmail} has created a new room.`);
+    router.push(`/?roomId=${newRoomId}`);
+  };
 
   return (
     <Menu.Root>
@@ -54,7 +45,7 @@ export function RoomActions({ usernameOrEmail, newRoomId }: { usernameOrEmail: s
         <Menu.ItemRoot>
           <Menu.InteractiveItem
             as="button"
-            onClick={() => newRoom({ usernameOrEmail, newRoomId, state })}
+            onClick={handleNewRoom}
           >
             New room
           </Menu.InteractiveItem>

@@ -98,10 +98,10 @@ function DisconnectButton({
     state === "closed"
       ? async () => {
       cable?.connect();
-      await createSystemMessage(`User ${usernameOrEmail} has connected to the server.`);
+      await createSystemMessage(`System: User ${usernameOrEmail} has connected to our chat room.`);
     }
       : async () => {
-      await createSystemMessage(`User ${usernameOrEmail} is disconnecting from the server.`);
+      await createSystemMessage(`System: User ${usernameOrEmail} is disconnecting from our chat room.`);
       cable?.disconnect();
     };
 
@@ -121,7 +121,7 @@ function SignOutButton({
 }) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await createSystemMessage(`Goodbye ${usernameOrEmail} from our chat room`);
+    await createSystemMessage(`System: Goodbye ${usernameOrEmail} from our chat room`);
     signOutAction();
   };
 
