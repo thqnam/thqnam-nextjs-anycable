@@ -10,16 +10,15 @@ export type CableIdentifiers = {
   username: string;
 };
 
-export const CABLE_URL = process.env.CABLE_URL || "ws://localhost:8080/cable";
+export const CABLE_URL = process.env.CABLE_URL!;
 
 // Broadcasting configuration
-const broadcastURL =
-  process.env.ANYCABLE_HTTP_BROADCAST_URL || "http://localhost:8090/_broadcast";
-const broadcastToken = process.env.ANYCABLE_HTTP_BROADCAST_SECRET || "";
+const broadcastURL = process.env.ANYCABLE_HTTP_BROADCAST_URL!;
+const broadcastToken = process.env.ANYCABLE_HTTP_BROADCAST_SECRET!;
 
 export const broadcastTo = broadcaster(broadcastURL, broadcastToken);
 
-const jwtSecret = process.env.ANYCABLE_JWT_ID_KEY || "hey";
+const jwtSecret = process.env.ANYCABLE_JWT_ID_KEY!;
 const jwtTTL = "60h";
 
 export const identifier = identificator<CableIdentifiers>(jwtSecret, jwtTTL);
