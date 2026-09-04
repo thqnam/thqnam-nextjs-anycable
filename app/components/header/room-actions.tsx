@@ -5,6 +5,7 @@ import { createSystemMessage } from "@/app/stores/messages";
 import { $cableState } from "@/app/stores/cable";
 import { useStore } from "@nanostores/react";
 import { useRouter } from "next/navigation";
+import { nanoid } from "nanoid";
 
 async function copyToClipboard({
   usernameOrEmail,
@@ -13,7 +14,7 @@ async function copyToClipboard({
   usernameOrEmail?: string;
   state: ReturnType<typeof useStore<typeof $cableState>>;
 }) {
-  if (state === "connected" || state === "idle") {
+  if (state === "connected") {
     await createSystemMessage(`System: User ${usernameOrEmail} has copied the room URL to clipboard.`);
     await navigator.clipboard.writeText(window.location.href);
   } else {
@@ -21,12 +22,15 @@ async function copyToClipboard({
   }
 }
 
-export function RoomActions({ usernameOrEmail, newRoomId }: { usernameOrEmail: string; newRoomId: string }) {
+export function RoomActions({ usernameOrEmail }: { usernameOrEmail: string }) {
   const state = useStore($cableState);
   const router = useRouter();
 
   const handleNewRoom = async () => {
-    if (state === "connected" || state === "idle") await createSystemMessage(`System: User ${usernameOrEmail} has created a new room.`);
+    if (state === "connected") {
+      await createSystemMessage(`System: User ${usernameOrEmail} has created a new room.`);
+    }
+    const newRoomId = nanoid();
     router.push(`/?roomId=${newRoomId}`);
   };
 

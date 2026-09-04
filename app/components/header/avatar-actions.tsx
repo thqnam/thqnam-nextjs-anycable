@@ -98,7 +98,6 @@ function DisconnectButton({
     state === "closed"
       ? async () => {
       cable?.connect();
-      await createSystemMessage(`System: User ${usernameOrEmail} has connected to our chat room.`);
     }
       : async () => {
       await createSystemMessage(`System: User ${usernameOrEmail} is disconnecting from our chat room.`);
